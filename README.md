@@ -5,8 +5,9 @@ SoundSquare is a 16x16 pentatonic step sequencer. You have 8 instruments, 16 ton
 ## To Build
 1. Install a midi server. I used [fluidsynth](http://www.fluidsynth.org/).
 2. Install [openFrameworks](http://www.openframeworks.cc/) and the ofxMidi extension.
-3. Point hw3 to your openFrameworks installation in `config.make`
-4. Run `make`
+3. `git clone` this repo on your machine or download it as a .zip
+4. Point hw3 to your openFrameworks installation in `config.make`
+5. Run `make`
 
 ## To Run
 1. Run your midi server. For me, I run fluidsynth and point it to the correct sound card with: `fluidsynth --server --audio-driver=alsa -o audio.alsa.device=hw:1,0 /usr/share/sounds/sf2/FluidR3_GM.sf2`
@@ -23,6 +24,9 @@ I use midi for my sound output. This makes playing different instruments with di
 Software-wise, I use a 2-d array of bitmaps to record which instruments are active at which pitches and steps. This allows me to use just 1 bit per combination of instrument, pitch, and step so it's quite efficient.
 
 ## More screenshots
+One instrument
 ![one instrument](screenshots/simple.png)
+Multiple instruments
 ![multiple instruments](screenshots/multi.png)
+Multiple instruments playing the same note at the same time. Check out how the dot gets divided into sectors!
 ![simultaneous instruments](screenshots/simultaneous.png)
