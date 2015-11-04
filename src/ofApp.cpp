@@ -86,6 +86,7 @@ void ofApp::draw() {
 	float baseRadius = dim / (5*X);
 	float tf = 0.2 * sin(2 * M_PI * mt / (8 * p));
 
+	ofFill();
 	// Draw hover indicator
 	ofPoint hoverDot = getDot(mouseX, mouseY);
 	int hoverX = round(hoverDot.x), hoverY = round(hoverDot.y);
@@ -129,6 +130,33 @@ void ofApp::draw() {
 			}
 		}
 	}
+
+	// Draw channel activity status
+	for (int i = 0; i < N_INSTRUMENTS; i++) {
+		ofColor color = instrumentColors[i];
+		ofSetColor(color);
+		float baseRadius = dim / (4*X);
+		float radius = baseRadius;
+		if (mutes.test(i)) {
+			ofNoFill();
+			radius = baseRadius * 0.8;
+		}
+		else {
+			ofFill();
+			radius = baseRadius * (1 + tf / 2);
+		}
+		ofCircle((w - dim) / 2 - 4 * baseRadius,
+				 (h - dim) / 2 + dim * (i+1.f) / (N_INSTRUMENTS + 1),
+				 radius);
+	}
+
+	// Draw current channel
+	ofNoFill();
+	ofColor currentColor = instrumentColors[currentInstrument];
+	ofSetColor(currentColor);
+	ofCircle((w - dim) / 2 - dim / X,
+			 (h - dim) / 2 + dim * (currentInstrument+1.f) / (N_INSTRUMENTS + 1),
+			 dim / (2*X));
 }
 
 //--------------------------------------------------------------
